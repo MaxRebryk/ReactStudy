@@ -1,6 +1,7 @@
 import Product from './Product';
 import { Mailbox } from './Mailbox';
 import { BookList } from './Booklist';
+import { Alert } from './Alert';
 import './App.css';
 
 const favouriteBooks = [
@@ -27,6 +28,20 @@ export default function App() {
       <Mailbox username="Max" messages={['hello', 'how are you', 'hi']} />
 
       <BookList books={favouriteBooks} />
+      <>
+        <Alert variant="info">
+          Would you like to browse our recommended products?
+        </Alert>
+        <Alert variant="error">
+          There was an error during your last transaction
+        </Alert>
+        <Alert variant="success">
+          Payment received, thank you for your purchase
+        </Alert>
+        <Alert variant="warning">
+          Please update your profile contact information
+        </Alert>
+      </>
     </div>
   );
 }
