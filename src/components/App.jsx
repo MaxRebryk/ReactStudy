@@ -32,13 +32,13 @@ export default function App() {
         <Alert variant="info">
           Would you like to browse our recommended products?
         </Alert>
-        <Alert variant="error">
+        <Alert variant="error" outlined={true}>
           There was an error during your last transaction
         </Alert>
-        <Alert variant="success">
+        <Alert variant="success" elevated={true}>
           Payment received, thank you for your purchase
         </Alert>
-        <Alert variant="warning">
+        <Alert variant="warning" elevated={true}>
           Please update your profile contact information
         </Alert>
       </>
