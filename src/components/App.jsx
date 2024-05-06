@@ -2,6 +2,7 @@ import Product from './Product';
 import { Mailbox } from './Mailbox';
 import { BookList } from './Booklist';
 import { Alert } from './Alert';
+import { UserMenu } from './HiUser';
 import './App.css';
 
 const favouriteBooks = [
@@ -42,6 +43,7 @@ export default function App() {
           Please update your profile contact information
         </Alert>
       </>
+      <UserMenu name="Max" />
     </div>
   );
 }
