@@ -1,8 +1,9 @@
-import Product from './Product';
-import { Mailbox } from './Mailbox';
-import { BookList } from './Booklist';
-import { Alert } from './Alert';
-import { UserMenu } from './HiUser';
+import Product from '../Product/Product';
+import { Mailbox } from '../Mailbox/Mailbox';
+import { BookList } from '../Booklist/Booklist';
+import { Alert } from '../Alert/Alert';
+import { UserMenu } from '../HiUser/HiUser';
+import Button from '../Button/Button.jsx';
 import './App.css';
 
 const favouriteBooks = [
@@ -44,6 +45,7 @@ export default function App() {
         </Alert>
       </>
       <UserMenu name="Max" />
+      <Button />
     </div>
   );
 }
