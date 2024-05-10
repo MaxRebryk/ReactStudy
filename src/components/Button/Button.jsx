@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Button({ value, onUpdate }) {
   // const [clicks, setClicks] = useState(0);
@@ -11,6 +12,8 @@ export default function Button({ value, onUpdate }) {
   //     {phrase} {clicks}
   //   </button>
   // );
-
+  useEffect(() => {
+    console.log({ value });
+  }, [onUpdate]);
   return <button onClick={onUpdate}>Current: {value}</button>;
 }

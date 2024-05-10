@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Product from '../Product/Product';
 import { Mailbox } from '../Mailbox/Mailbox';
 import { BookList } from '../Booklist/Booklist';
@@ -15,12 +15,15 @@ const favouriteBooks = [
 
 export default function App() {
   const [clicks, setClicks] = useState(0);
-
   // Функція, яку будемо передавати в ClickCounter
   // для виклику під час кліку
   const handleClick = () => {
     setClicks(clicks + 1);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-clicks', clicks);
+  }, [clicks]);
 
   return (
     <div>
@@ -54,6 +57,7 @@ export default function App() {
         </Alert>
       </>
       <UserMenu name="Max" />
+
       <Button value={clicks} onUpdate={handleClick} />
       <Button value={clicks} onUpdate={handleClick} />
     </div>
