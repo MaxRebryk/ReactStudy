@@ -14,15 +14,17 @@ const favouriteBooks = [
 ];
 
 export default function App() {
-  const [clicks, setClicks] = useState(0);
-  // Функція, яку будемо передавати в ClickCounter
-  // для виклику під час кліку
+  const [clicks, setClicks] = useState(() => {
+    const savedClicks = localStorage.getItem('saved-clicks');
+    return savedClicks !== null ? JSON.parse(savedClicks) : 0;
+  });
+
   const handleClick = () => {
     setClicks(clicks + 1);
   };
 
   useEffect(() => {
-    window.localStorage.setItem('saved-clicks', clicks);
+    localStorage.setItem('saved-clicks', clicks);
   }, [clicks]);
 
   return (
