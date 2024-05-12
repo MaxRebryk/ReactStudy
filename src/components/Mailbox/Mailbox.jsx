@@ -10,3 +10,5 @@ export const Mailbox = ({ username = 'Anonymous', messages }) => {
     </>
   );
 };
+import { View, Text } from 'react-native';
+import React from 'react';
