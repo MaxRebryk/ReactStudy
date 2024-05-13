@@ -9,6 +9,7 @@ import Form from '../Form/Form.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import LangSwitcher from '../LangSwitcher/LangSwitcher.jsx';
 import Radio from '../Radio/Radio.jsx';
+import Checkbox from '../Checkbox/Checkbox.jsx';
 import './App.css';
 
 const favouriteBooks = [
@@ -26,6 +27,12 @@ export default function App() {
   const [lang, setLang] = useState('uk');
 
   const [coffeeSize, setCoffeeSize] = useState('sm');
+
+  const [hasAccepted, setHasAccepted] = useState(false);
+
+  const handleChange = evt => {
+    setHasAccepted(evt.target.checked);
+  };
 
   const handleClick = () => {
     setClicks(clicks + 1);
@@ -79,6 +86,7 @@ export default function App() {
       <p>Selected language: {lang}</p>
       <LangSwitcher value={lang} onSelect={setLang} />
       <Radio value={coffeeSize} onSelect={setCoffeeSize} />
+      <Checkbox checked={hasAccepted} onChange={handleChange} />
     </div>
   );
 }
