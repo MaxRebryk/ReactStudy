@@ -5,6 +5,10 @@ import { BookList } from '../Booklist/Booklist';
 import { Alert } from '../Alert/Alert';
 import { UserMenu } from '../HiUser/HiUser';
 import Button from '../Button/Button.jsx';
+import Form from '../Form/Form.jsx';
+import SearchBar from '../SearchBar/SearchBar.jsx';
+import LangSwitcher from '../LangSwitcher/LangSwitcher.jsx';
+import Radio from '../Radio/Radio.jsx';
 import './App.css';
 
 const favouriteBooks = [
@@ -19,8 +23,16 @@ export default function App() {
     return savedClicks !== null ? JSON.parse(savedClicks) : 0;
   });
 
+  const [lang, setLang] = useState('uk');
+
+  const [coffeeSize, setCoffeeSize] = useState('sm');
+
   const handleClick = () => {
     setClicks(clicks + 1);
+  };
+
+  const handleLogin = userData => {
+    console.log(userData);
   };
 
   useEffect(() => {
@@ -62,6 +74,11 @@ export default function App() {
 
       <Button value={clicks} onUpdate={handleClick} />
       <Button value={clicks} onUpdate={handleClick} />
+      <Form onLogin={handleLogin} />
+      <SearchBar />
+      <p>Selected language: {lang}</p>
+      <LangSwitcher value={lang} onSelect={setLang} />
+      <Radio value={coffeeSize} onSelect={setCoffeeSize} />
     </div>
   );
 }
