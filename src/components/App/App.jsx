@@ -10,6 +10,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 import LangSwitcher from '../LangSwitcher/LangSwitcher.jsx';
 import Radio from '../Radio/Radio.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
+import FormikForm from '../FormikForm/FormikForm.jsx';
 import './App.css';
 
 const favouriteBooks = [
@@ -87,6 +88,7 @@ export default function App() {
       <LangSwitcher value={lang} onSelect={setLang} />
       <Radio value={coffeeSize} onSelect={setCoffeeSize} />
       <Checkbox checked={hasAccepted} onChange={handleChange} />
+      <FormikForm />
     </div>
   );
 }

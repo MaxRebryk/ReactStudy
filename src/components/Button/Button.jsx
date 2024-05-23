@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function Button({ value, onUpdate }) {
   // const [clicks, setClicks] = useState(0);
