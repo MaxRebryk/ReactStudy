@@ -12,6 +12,9 @@ import Radio from '../Radio/Radio.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 import FormikForm from '../FormikForm/FormikForm.jsx';
 import './App.css';
+import axios from 'axios';
+import { Audio } from 'react-loader-spinner';
+// import { fetchArticlesWithTopic } from '../articles-api.js';
 
 const favouriteBooks = [
   { id: 'id-1', name: 'JS for beginners' },
@@ -31,6 +34,10 @@ export default function App() {
 
   const [hasAccepted, setHasAccepted] = useState(false);
 
+  const [articles, setArticles] = useState([]);
+
+  const [error, setError] = useState(false);
+
   const handleChange = evt => {
     setHasAccepted(evt.target.checked);
   };
@@ -43,9 +50,30 @@ export default function App() {
     console.log(userData);
   };
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     localStorage.setItem('saved-clicks', clicks);
   }, [clicks]);
+
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          'https://hn.algolia.com/api/v1/search?query=react'
+        );
+        setArticles(response.data.hits);
+      } catch (error) {
+        // Встановлюємо стан error в true
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchArticles();
+  }, []);
 
   return (
     <div>
@@ -89,6 +117,36 @@ export default function App() {
       <Radio value={coffeeSize} onSelect={setCoffeeSize} />
       <Checkbox checked={hasAccepted} onChange={handleChange} />
       <FormikForm />
+
+      <div>
+        <h1>Latest articles</h1>
+        {loading && (
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="green"
+            ariaLabel="three-dots-loading"
+            wrapperStyle
+            wrapperClass
+          />
+        )}
+        {error && (
+          <p>Whoops, something went wrong! Please try reloading this page!</p>
+        )}
+
+        {articles.length > 0 && (
+          <ul>
+            {articles.map(({ objectID, url, title }) => (
+              <li key={objectID}>
+                <a href={url} target="_blank" rel="noreferrer noopener">
+                  {title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
