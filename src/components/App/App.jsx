@@ -14,6 +14,7 @@ import FormikForm from '../FormikForm/FormikForm.jsx';
 import './App.css';
 import axios from 'axios';
 import { Audio } from 'react-loader-spinner';
+import { fetchArticlesWithTopic } from '../articles-api.js';
 // import { fetchArticlesWithTopic } from '../articles-api.js';
 
 const favouriteBooks = [
@@ -60,10 +61,9 @@ export default function App() {
     async function fetchArticles() {
       try {
         setLoading(true);
-        const response = await axios.get(
-          'https://hn.algolia.com/api/v1/search?query=react'
-        );
-        setArticles(response.data.hits);
+        setError(false);
+        const data = await fetchArticlesWithTopic('react');
+        setArticles(data);
       } catch (error) {
         // Встановлюємо стан error в true
         setError(true);
