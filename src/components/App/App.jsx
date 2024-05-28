@@ -15,6 +15,9 @@ import './App.css';
 import axios from 'axios';
 import { Audio } from 'react-loader-spinner';
 import { fetchArticlesWithTopic } from '../articles-api.js';
+import { useMemo } from 'react';
+import { useRef } from 'react';
+
 // import { fetchArticlesWithTopic } from '../articles-api.js';
 
 const favouriteBooks = [
@@ -38,6 +41,17 @@ export default function App() {
   const [articles, setArticles] = useState([]);
 
   const [error, setError] = useState(false);
+
+  const [planets, setPlanets] = useState(['Earth', 'Mars', 'Jupiter', 'Venus']);
+  const [query, setQuery] = useState('');
+
+  const playerRef = useRef();
+
+  const source = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
+
+  const play = () => playerRef.current.play();
+
+  const pause = () => playerRef.current.pause();
 
   const handleChange = evt => {
     setHasAccepted(evt.target.checked);
@@ -74,6 +88,11 @@ export default function App() {
 
     fetchArticles();
   }, []);
+
+  const filteredPlanets = useMemo(
+    () => planets.filter(planet => planet.includes(query)),
+    [planets, query]
+  );
 
   return (
     <div>
@@ -146,6 +165,21 @@ export default function App() {
             ))}
           </ul>
         )}
+      </div>
+
+      <ul>
+        {filteredPlanets.map(planet => (
+          <li key={planet}>{planet}</li>
+        ))}
+      </ul>
+      <div>
+        <video ref={playerRef} src={source}>
+          Sorry, your browser does not support embedded videos.
+        </video>
+        <div>
+          <button onClick={play}>Play</button>
+          <button onClick={pause}>Pause</button>
+        </div>
       </div>
     </div>
   );
