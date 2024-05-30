@@ -17,6 +17,12 @@ import { Audio } from 'react-loader-spinner';
 import { fetchArticlesWithTopic } from '../articles-api.js';
 import { useMemo } from 'react';
 import { useRef } from 'react';
+import { Routes, Route, NavLink } from 'react-router-dom';
+import About from '../../pages/About.jsx';
+import ProductPage from '../../pages/ProductPage.jsx';
+import Home from '../../pages/Home.jsx';
+import NotFound from '../../pages/NotFound.jsx';
+import ProductDetails from '../../pages/ProductDetails.jsx';
 
 // import { fetchArticlesWithTopic } from '../articles-api.js';
 
@@ -180,6 +186,20 @@ export default function App() {
           <button onClick={play}>Play</button>
           <button onClick={pause}>Pause</button>
         </div>
+      </div>
+      <div>
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/products">Products</NavLink>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/products/:productId" element={<ProductDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );
